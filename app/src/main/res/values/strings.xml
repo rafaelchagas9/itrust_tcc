@@ -1,0 +1,30 @@
+<resources>
+    <string name="app_name">Tcc</string>
+    <string name="title_inicio">Início</string>
+    <string name="title_favoritos">Favoritos</string>
+    <string name="title_pesquisar">Pesquisar</string>
+    <string name="title_perfil">Perfil</string>
+    <string name="account_name">Nome de usúario</string>
+    <string name="password">Senha</string>
+    <string name="password_hint">**********</string>
+    <string name="forgot_your_login_info">Esqueceu sua senha?</string>
+    <string name="sign_in">Entrar</string>
+    <string name="classe">Responsável/Menor</string>
+    <string name="email">E-mail</string>
+    <string name="estado">Estado</string>
+    <string name="remember_my_password">Lembrar senha</string>
+    <string name="username">Usuário</string>
+    <string name="create_account">Criar conta</string>
+    <string name="responsavel">Responsável</string>
+    <string name="menor">Menor de idade</string>
+    <string name="title_activity_login2">Sign in</string>
+    <string name="prompt_email">Email</string>
+    <string name="prompt_password">Password</string>
+    <string name="action_sign_in">Sign in or register</string>
+    <string name="action_sign_in_short">Sign in</string>
+    <string name="welcome">"Welcome !"</string>
+    <string name="invalid_username">Not a valid username</string>
+    <string name="invalid_password">Password must be >5 characters</string>
+    <string name="login_failed">"Login failed"</string>
+
+</resources>

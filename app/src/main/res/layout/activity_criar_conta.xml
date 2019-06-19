@@ -1,0 +1,144 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/login_bg">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        tools:context="br.com.fake.steam.LoginActivity">
+
+        <TextView
+            android:layout_marginTop="20dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:textColor="#EEE"
+            android:text="@string/account_name" />
+
+        <EditText
+            android:id="@+id/txt_usuario"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:background="@drawable/login_edittext_bg"
+            android:layout_marginTop="15dp"
+            android:layout_marginLeft="50dp"
+            android:layout_marginRight="50dp"
+            android:textAlignment="center"
+            android:textColor="@color/colorAccent"
+            android:textColorHint="#CCC"
+            android:hint="@string/username"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:textColor="#EEE"
+            android:text="@string/email"
+            android:layout_marginTop="20dp"/>
+
+        <EditText
+            android:id="@+id/txt_email"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:layout_marginLeft="50dp"
+            android:layout_marginTop="15dp"
+            android:layout_marginRight="50dp"
+            android:background="@drawable/login_edittext_bg"
+            android:hint="@string/email"
+            android:inputType="textEmailAddress"
+            android:textAlignment="center"
+            android:textColor="@color/colorAccent"
+            android:textColorHint="#CCC" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:textColor="#EEE"
+            android:text="@string/estado"
+            android:layout_marginTop="20dp"/>
+
+        <EditText
+            android:id="@+id/txt_estado"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:layout_marginLeft="50dp"
+            android:layout_marginTop="15dp"
+            android:layout_marginRight="50dp"
+            android:background="@drawable/login_edittext_bg"
+            android:hint="Digite seu estado"
+            android:inputType="text"
+            android:textAlignment="center"
+            android:textColor="@color/colorAccent"
+            android:textColorHint="#CCC" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:textColor="#EEE"
+            android:text="@string/password"
+            android:layout_marginTop="20dp"/>
+
+        <EditText
+            android:id="@+id/txt_senha"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:layout_marginLeft="50dp"
+            android:layout_marginTop="15dp"
+            android:layout_marginRight="50dp"
+            android:layout_marginBottom="10dp"
+            android:background="@drawable/login_edittext_bg"
+            android:hint="@string/password_hint"
+            android:inputType="textPassword"
+            android:textAlignment="center"
+            android:textColor="@color/colorAccent"
+            android:textColorHint="#CCC" />
+
+        <RadioGroup
+            android:id="@+id/rg_classe"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:checkedButton="@id/rdb_menor">
+            <RadioButton
+                android:id="@+id/rdb_responsavel"
+                android:layout_width="match_parent"
+                android:layout_height="50dp"
+                android:layout_marginLeft="50dp"
+                android:layout_marginTop="15dp"
+                android:layout_marginRight="50dp"
+                android:buttonTint="#FFFFFF"
+                android:text="@string/responsavel"
+                android:textColor="@color/colorAccent" />
+
+            <RadioButton
+                android:id="@+id/rdb_menor"
+                android:layout_width="match_parent"
+                android:layout_height="50dp"
+                android:layout_marginLeft="50dp"
+                android:layout_marginTop="15dp"
+                android:layout_marginRight="50dp"
+                android:buttonTint="#FFFFFF"
+                android:text="@string/menor"
+                android:textColor="@color/colorAccent" />
+        </RadioGroup>
+
+
+        <Button
+            android:id="@+id/btn_criar_conta"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@drawable/login_button_bg"
+            android:text="registrar"
+            android:textColor="@color/colorAccent"
+            android:layout_marginTop="20dp"
+            android:layout_marginLeft="70dp"
+            android:layout_marginRight="70dp"
+            android:layout_marginBottom="20dp"/>
+
+    </LinearLayout>
+</ScrollView>
