@@ -27,7 +27,7 @@
             android:text="@string/account_name" />
 
         <EditText
-            android:id="@+id/et_usuario"
+            android:id="@+id/txt_email"
             android:layout_width="match_parent"
             android:layout_height="50dp"
             android:background="@drawable/login_edittext_bg"
@@ -84,7 +84,7 @@
             android:layout_marginRight="70dp"/>
 
         <Button
-            android:id="@+id/btn_register_account"
+            android:id="@+id/btn_criar_conta"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:background="@drawable/login_button_bg"

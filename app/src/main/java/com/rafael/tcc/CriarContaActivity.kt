@@ -30,6 +30,7 @@ class CriarContaActivity : AppCompatActivity() {
 
     //Referências ao banco de dados
 
+
     private var mDatabaseReference: DatabaseReference? = null
     private var mDatabase: FirebaseDatabase? = null
     private var mAuth: FirebaseAuth? = null
