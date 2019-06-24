@@ -1,7 +1,7 @@
 //Projeto: TCC
 //Version 0.1
 
-package com.rafael.tcc
+package com.rafael.tcc.ui.atividades
 
 import android.app.ProgressDialog
 import android.content.Intent
@@ -16,7 +16,7 @@ import androidx.annotation.RequiresApi
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.ContextCompat
 import com.google.firebase.auth.FirebaseAuth
-import kotlinx.android.synthetic.main.activity_login.*
+import com.rafael.tcc.R
 
 class LoginActivity : AppCompatActivity() {
 
@@ -28,10 +28,10 @@ class LoginActivity : AppCompatActivity() {
 
     //Elementos da interface
     private var tv_forgot_password: TextView? = null
-    private var txt_email: TextView? = null
-    private var txt_senha: TextView? = null
-    private var btn_login: TextView? = null
-    private var btn_criar_conta: TextView? = null
+    private var edit_email: EditText? = null
+    private var edit_senha: EditText? = null
+    private var btn_login: Button? = null
+    private var btn_criar_conta: Button? = null
     private var mProgressBar: ProgressDialog? = null
 
 
@@ -61,27 +61,28 @@ class LoginActivity : AppCompatActivity() {
     }
 
     private fun inicializar(){
-        tv_forgot_password = findViewById(R.id.tv_forgot_password) as TextView
-        txt_email = findViewById(R.id.txt_email) as EditText
-        txt_senha = findViewById(R.id.txt_senha) as EditText
-        btn_login = findViewById(R.id.btn_login) as Button
-        btn_criar_conta = findViewById(R.id.btn_criar_conta) as Button
+        tv_forgot_password = findViewById<TextView>(R.id.tv_forgot_password)
+        edit_email = findViewById<EditText>(R.id.edit_email)
+        edit_senha = findViewById<EditText>(R.id.edit_senha)
+        btn_login = findViewById<Button>(R.id.btn_login)
+        btn_criar_conta = findViewById<Button>(R.id.btn_criar_conta)
         mProgressBar = ProgressDialog(this)
         mAuth = FirebaseAuth.getInstance()
 
-        tv_forgot_password!!.setOnClickListener(){ startActivity(Intent(this@LoginActivity, EsqueceSenhaActivity::class.java))
+        tv_forgot_password!!.setOnClickListener{ startActivity(Intent(this@LoginActivity, EsqueceSenhaActivity::class.java))
         }
 
-        btn_criar_conta!!.setOnClickListener(){ startActivity(Intent(this@LoginActivity, CriarContaActivity::class.java))
+        btn_criar_conta!!.setOnClickListener{ startActivity(Intent(this@LoginActivity, CriarContaActivity::class.java))
         }
 
-        btn_login!!.setOnClickListener(){loginUser()}
+        btn_login!!.setOnClickListener{loginUser()}
 
     }
 
     private fun loginUser() {
-        email = txt_email?.text.toString()
-        senha = txt_senha?.text.toString()
+
+        email = edit_email?.text.toString()
+        senha = edit_senha?.text.toString()
 
         if(!TextUtils.isEmpty(email) && !TextUtils.isEmpty(senha)){
             mProgressBar!!.setMessage("Verificando o usuário")

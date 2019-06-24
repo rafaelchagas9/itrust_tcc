@@ -11,6 +11,18 @@
         android:orientation="vertical"
         tools:context="br.com.fake.steam.LoginActivity">
 
+        <ProgressBar
+            android:id="@+id/note_list_progress"
+            style="?android:attr/progressBarStyleHorizontal"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:indeterminate="true"
+            android:max="100"
+            android:backgroundTint="@color/colorAccent"
+            android:indeterminateTint="#1a09d6"
+            android:layout_marginTop="-7dp"
+            android:visibility="gone"/>
+
         <TextView
             android:layout_marginTop="20dp"
             android:layout_width="wrap_content"
@@ -20,17 +32,57 @@
             android:text="@string/account_name" />
 
         <EditText
-            android:id="@+id/txt_usuario"
+            android:id="@+id/txt_nome"
             android:layout_width="match_parent"
             android:layout_height="50dp"
-            android:background="@drawable/login_edittext_bg"
-            android:layout_marginTop="15dp"
             android:layout_marginLeft="50dp"
+            android:layout_marginTop="15dp"
             android:layout_marginRight="50dp"
+            android:background="@drawable/login_edittext_bg"
             android:textAlignment="center"
             android:textColor="@color/colorAccent"
-            android:textColorHint="#CCC"
-            android:hint="@string/username"/>
+            android:textColorHint="#CCC" />
+
+        <TextView
+            android:layout_marginTop="20dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:textColor="#EEE"
+            android:text="@string/sobrenome" />
+
+        <EditText
+            android:id="@+id/txt_sobrenome"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:layout_marginLeft="50dp"
+            android:layout_marginTop="15dp"
+            android:layout_marginRight="50dp"
+            android:background="@drawable/login_edittext_bg"
+            android:textAlignment="center"
+            android:textColor="@color/colorAccent"
+            android:textColorHint="#CCC" />
+
+        <TextView
+            android:layout_marginTop="20dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:textColor="#EEE"
+            android:text="@string/dataNasc" />
+
+        <EditText
+            android:id="@+id/txt_dataNasc"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:layout_marginLeft="50dp"
+            android:layout_marginTop="15dp"
+            android:layout_marginRight="50dp"
+            android:inputType="date"
+            android:background="@drawable/login_edittext_bg"
+            android:textAlignment="center"
+            android:textColor="@color/colorAccent"
+            android:textColorHint="#CCC" />
 
         <TextView
             android:layout_width="wrap_content"
@@ -48,7 +100,7 @@
             android:layout_marginTop="15dp"
             android:layout_marginRight="50dp"
             android:background="@drawable/login_edittext_bg"
-            android:hint="@string/email"
+            android:hint="@string/email_hint"
             android:inputType="textEmailAddress"
             android:textAlignment="center"
             android:textColor="@color/colorAccent"
@@ -62,15 +114,33 @@
             android:text="@string/estado"
             android:layout_marginTop="20dp"/>
 
+        <Spinner
+            android:id="@+id/spinner_estado"
+            android:spinnerMode="dropdown"
+            android:background="@drawable/login_edittext_bg"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:layout_marginLeft="50dp"
+            android:layout_marginTop="15dp"
+            android:layout_marginRight="50dp"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:textColor="#EEE"
+            android:text="Cidade"
+            android:layout_marginTop="20dp"/>
+
         <EditText
-            android:id="@+id/txt_estado"
+            android:id="@+id/txt_cidade"
             android:layout_width="match_parent"
             android:layout_height="50dp"
             android:layout_marginLeft="50dp"
             android:layout_marginTop="15dp"
             android:layout_marginRight="50dp"
+            android:layout_marginBottom="10dp"
             android:background="@drawable/login_edittext_bg"
-            android:hint="Digite seu estado"
             android:inputType="text"
             android:textAlignment="center"
             android:textColor="@color/colorAccent"
@@ -99,33 +169,23 @@
             android:textColor="@color/colorAccent"
             android:textColorHint="#CCC" />
 
-        <RadioGroup
-            android:id="@+id/rg_classe"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:checkedButton="@id/rdb_menor">
-            <RadioButton
-                android:id="@+id/rdb_responsavel"
-                android:layout_width="match_parent"
-                android:layout_height="50dp"
-                android:layout_marginLeft="50dp"
-                android:layout_marginTop="15dp"
-                android:layout_marginRight="50dp"
-                android:buttonTint="#FFFFFF"
-                android:text="@string/responsavel"
-                android:textColor="@color/colorAccent" />
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:textColor="#EEE"
+            android:text="Condição"
+            android:layout_marginTop="20dp"/>
 
-            <RadioButton
-                android:id="@+id/rdb_menor"
-                android:layout_width="match_parent"
-                android:layout_height="50dp"
-                android:layout_marginLeft="50dp"
-                android:layout_marginTop="15dp"
-                android:layout_marginRight="50dp"
-                android:buttonTint="#FFFFFF"
-                android:text="@string/menor"
-                android:textColor="@color/colorAccent" />
-        </RadioGroup>
+        <Spinner
+            android:id="@+id/spinner_condicao"
+            android:spinnerMode="dropdown"
+            android:background="@drawable/login_edittext_bg"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:layout_marginLeft="50dp"
+            android:layout_marginTop="15dp"
+            android:layout_marginRight="50dp"/>
 
 
         <Button

@@ -1,9 +1,50 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".EsqueceSenhaActivity">
+    android:background="@drawable/login_bg">
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+    <LinearLayout
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        xmlns:tools="http://schemas.android.com/tools"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        tools:context="br.com.fake.steam.LoginActivity"
+        >
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:textColor="#EEE"
+            android:text="Insira seu e-mail"
+            android:layout_marginTop="40dp"/>
+
+    <EditText
+        android:id="@+id/txt_email"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:layout_marginLeft="50dp"
+        android:layout_marginTop="15dp"
+        android:layout_marginRight="50dp"
+        android:background="@drawable/login_edittext_bg"
+        android:hint="@string/email"
+        android:inputType="textEmailAddress"
+        android:textAlignment="center"
+        android:textColor="@color/colorAccent"
+        android:textColorHint="#CCC" />
+
+        <Button
+            android:id="@+id/btn_recuperar_senha"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@drawable/login_button_bg"
+            android:text="Recuperar senha"
+            android:textColor="@color/colorAccent"
+            android:layout_marginTop="20dp"
+            android:layout_marginLeft="70dp"
+            android:layout_marginRight="70dp"/>
+
+    </LinearLayout>
+</ScrollView>
