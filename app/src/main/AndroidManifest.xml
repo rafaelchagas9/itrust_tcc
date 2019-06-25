@@ -38,10 +38,6 @@
         <meta-data
             android:name="com.google.android.geo.API_KEY"
             android:value="@string/google_maps_key" />
-
-        <activity android:name=".ui.atividades.CadastroInfoActivity">
-
-        </activity>
         <activity android:name=".ui.atividades.EsqueceSenhaActivity" />
         <activity android:name=".ui.atividades.CriarContaActivity" />
         <activity android:name=".ui.atividades.LoginActivity" />
