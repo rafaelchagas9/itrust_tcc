@@ -1,17 +1,58 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="match_parent" android:layout_height="match_parent"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:background="@drawable/login_bg">
 
-    <androidx.appcompat.widget.AppCompatTextView
+    <androidx.appcompat.widget.AppCompatButton
+        android:id="@+id/btn_FotoPerfil"
+        android:layout_width="150dp"
+        android:layout_height="150dp"
+        android:text="Selecione uma imagem"
+        android:textColor="@color/colorAccent"
+        android:background="@drawable/rounded_select_photo_button"
+        android:layout_marginLeft="130dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginRight="130dp"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentRight="true"
+        android:alpha="00"
+        />
+
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
+        android:id="@+id/fabSalvarFoto"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Olá"
+        android:layout_alignStart="@+id/btn_FotoPerfil"
+        android:layout_alignTop="@+id/btn_FotoPerfil"
+        android:layout_marginStart="100dp"
+        android:layout_marginTop="100dp"
+        android:visibility="gone"
+        android:src="@drawable/ic_done_black_24dp"/>
+
+    <androidx.appcompat.widget.AppCompatTextView
+        android:id="@+id/tv_boasVindas"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Bem vindo(a)"
+        android:layout_below="@+id/btn_FotoPerfil"
         android:textSize="30sp"
         android:textColor="@color/colorAccent"
-        android:layout_alignParentTop="true"
         android:layout_marginTop="8dp"
-        android:layout_marginLeft="5dp"/>
+        android:layout_marginLeft="5dp" />
+
+    <androidx.appcompat.widget.AppCompatTextView
+        android:id="@+id/tv_emailVerificado"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text=""
+        android:textSize="15sp"
+        android:layout_below="@+id/tv_boasVindas"
+        android:textColor="@color/colorAccent"
+        android:layout_marginTop="8dp"
+        android:layout_marginLeft="8dp"/>
 
     <androidx.appcompat.widget.AppCompatButton
         android:id="@+id/btn_sair"
@@ -19,6 +60,24 @@
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
         android:text="Sair"
-        android:onClick="onBtnSairClick" />
-    
+        android:onClick="onBtnSairClick"
+        android:background="@drawable/sair_button_bg"
+        android:textColor="@color/colorPrimaryDark"
+        android:layout_marginBottom="10dp"/>
+
+    <de.hdodenhof.circleimageview.CircleImageView
+        android:id="@+id/cv_FotoPerfil"
+        app:civ_border_width="4dp"
+        android:layout_width="150dp"
+        android:layout_height="150dp"
+        android:layout_alignStart="@+id/btn_FotoPerfil"
+        android:layout_alignTop="@+id/btn_FotoPerfil"
+        android:layout_alignEnd="@+id/btn_FotoPerfil"
+        android:layout_alignBottom="@+id/btn_FotoPerfil"
+        android:layout_marginStart="0dp"
+        android:layout_marginTop="0dp"
+        android:layout_marginEnd="0dp"
+        android:layout_marginBottom="0dp"
+        android:background="@drawable/ic_account_circle_black_24dp"/>
+
 </RelativeLayout>

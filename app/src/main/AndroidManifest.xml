@@ -8,7 +8,10 @@
          location permissions for the 'MyLocation' functionality.
     -->
     <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
-
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE"/>
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE"/>
+    <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
     <dist:module dist:instant="true" />
 
     <supports-screens
@@ -39,8 +42,10 @@
             android:name="com.google.android.geo.API_KEY"
             android:value="@string/google_maps_key" />
         <activity android:name=".ui.atividades.EsqueceSenhaActivity" />
-        <activity android:name=".ui.atividades.CriarContaActivity" />
-        <activity android:name=".ui.atividades.LoginActivity" />
+        <activity android:name=".ui.atividades.CriarContaActivity"
+            android:windowSoftInputMode="stateHidden"/>
+        <activity android:name=".ui.atividades.LoginActivity"
+            android:windowSoftInputMode="stateHidden"/>
         <activity android:name=".ui.atividades.SplashActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

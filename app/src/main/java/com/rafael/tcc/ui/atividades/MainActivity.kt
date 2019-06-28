@@ -3,6 +3,8 @@ package com.rafael.tcc.ui.atividades
 import android.content.Intent
 import android.os.Bundle
 import android.util.Log
+import android.view.View
+import android.widget.EditText
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
 import com.google.android.material.bottomnavigation.BottomNavigationView
@@ -10,8 +12,11 @@ import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.database.DatabaseReference
 import com.google.firebase.database.FirebaseDatabase
 import com.rafael.tcc.R
-import com.rafael.tcc.ui.fragmentos.*
-import android.view.View
+import com.rafael.tcc.ui.fragmentos.FavoriteFragment
+import com.rafael.tcc.ui.fragmentos.HomeFragment
+import com.rafael.tcc.ui.fragmentos.ProfileFragment
+import com.rafael.tcc.ui.fragmentos.SearchFragment
+import kotlinx.android.synthetic.main.fragment_profile.*
 
 
 class MainActivity : AppCompatActivity() {
@@ -20,6 +25,7 @@ class MainActivity : AppCompatActivity() {
     private val mDatabase: FirebaseDatabase? = FirebaseDatabase.getInstance()
     private val mDatabaseReference: DatabaseReference? = mDatabase!!.reference.child("Users")
     private val mAuth: FirebaseAuth? = FirebaseAuth.getInstance()
+
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -31,6 +37,22 @@ class MainActivity : AppCompatActivity() {
 
         //Definindo que o programa deve iniciar com o Fragmento Home e não em branco
         supportFragmentManager.beginTransaction().replace(R.id.fragment_container, HomeFragment()).commit()
+
+        verificarUsuarioLogado()
+    }
+
+    private fun verificarUsuarioLogado() {
+        val mUsuario = mAuth!!.currentUser
+        if(mUsuario!=null){
+            Log.e("TESTE", ""+mUsuario)
+        }
+        else{
+            Log.e("Sessão expirada", "REDIRECIONANDO")
+            val intent = Intent(this@MainActivity, LoginActivity::class.java)
+            intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP)
+            startActivity(intent)
+            this.finish()
+        }
 
     }
 
@@ -48,6 +70,8 @@ class MainActivity : AppCompatActivity() {
         supportFragmentManager.beginTransaction().setCustomAnimations(android.R.anim.fade_in,
                 android.R.anim.fade_out).replace(R.id.fragment_container, fragmentoSelecionado!!).commit()
 
+
+
         true
     }
 
@@ -56,8 +80,9 @@ class MainActivity : AppCompatActivity() {
         val intent = Intent(this@MainActivity, LoginActivity::class.java)
         intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP)
         startActivity(intent)
+        this.finish()
     }
-    }
+}
 
 
 

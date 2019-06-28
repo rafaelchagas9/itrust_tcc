@@ -43,9 +43,8 @@ class LoginActivity : AppCompatActivity() {
         setContentView(R.layout.activity_login)
         inicializar()
 
-        if(Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP){
-            window.setStatusBarColorTo(R.color.colorPrimary)
-        }
+        window.setStatusBarColorTo(R.color.colorPrimary)
+
     }
     @RequiresApi(Build.VERSION_CODES.LOLLIPOP)
     fun Window.setStatusBarColorTo(color: Int){
@@ -113,6 +112,7 @@ class LoginActivity : AppCompatActivity() {
         val intent = Intent(this@LoginActivity, MainActivity::class.java)
         intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP)
         startActivity(intent)
+        this.finish()
     }
 
 }
