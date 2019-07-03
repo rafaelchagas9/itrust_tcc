@@ -7,10 +7,9 @@ import android.net.Uri
 import android.os.Bundle
 import android.provider.MediaStore
 import android.util.Log
-import android.view.LayoutInflater
-import android.view.View
-import android.view.ViewGroup
+import android.view.*
 import android.widget.Toast
+import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.UserProfileChangeRequest
@@ -27,20 +26,26 @@ import java.util.*
  */
 class ProfileFragment : Fragment() {
 
+    //variáveis relacionadas ao banco de dados
     private val mAuth: FirebaseAuth? = FirebaseAuth.getInstance()
-    var fotoSelecionadaUri: Uri? = null
-    val mUsuario = mAuth!!.currentUser
+    private val mUsuario = mAuth!!.currentUser
+    private val url = mUsuario?.photoUrl
 
-
-    var nome: String? = null
-    var emailVerificado: Boolean? = null
+    //Declaração da variáveis globais
+    private var nome: String? = null
+    private var emailVerificado: Boolean? = null
+    private var fotoSelecionadaUri: Uri? = null
 
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
-
+        //"Inflando" a view com o conteúdo do fragmento do perfil
         val view: View = inflater.inflate(R.layout.fragment_profile, container, false)
 
-        val url = mUsuario?.photoUrl
+        // Set the action bar title, subtitle and elevation
+        setHasOptionsMenu(true)
+
+        //Verificando se o usuário possui uma foto personalizada, depois usando o Picasso
+        //para exibir a imagem do mesmo
         if (url!=null) {
             Picasso
                     .get()
@@ -48,8 +53,7 @@ class ProfileFragment : Fragment() {
                     .into(view.cv_FotoPerfil)
         }
 
-
-
+        //Buscando dados do usuário
         buscarDados()
 
         //Mudando as informações da UI de acordo com o usuário
@@ -58,7 +62,6 @@ class ProfileFragment : Fragment() {
         }else{
             view.tv_emailVerificado.text="Por favor verifique seu e-mail para ter acesso a todas as funcionalidades"
         }
-
         view.tv_boasVindas.text = view.tv_boasVindas.text.toString()+" "+(nome)
 
 
@@ -67,7 +70,6 @@ class ProfileFragment : Fragment() {
             val intent = Intent(Intent.ACTION_PICK)
             intent.type= "image/*"
             startActivityForResult(intent, 0)
-            view.fabSalvarFoto.show()
         }
 
         view.fabSalvarFoto.setOnClickListener{
@@ -101,15 +103,12 @@ class ProfileFragment : Fragment() {
 
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         super.onActivityResult(requestCode, resultCode, data)
-
+        //Verificando se o usuário selecionou alguma imagem e se a seleção deu certo
         if (requestCode == 0 && resultCode == Activity.RESULT_OK && data != null){
-            //Seguir e checar a imagem selecionada
-            Log.e("TESTE", "SELECIONADA")
-
             fotoSelecionadaUri = data.data
-
             val bitmap = MediaStore.Images.Media.getBitmap(activity?.contentResolver, fotoSelecionadaUri)
             view?.cv_FotoPerfil?.setImageBitmap(bitmap)
+            view?.fabSalvarFoto?.show()
         }
     }
 
@@ -127,8 +126,17 @@ class ProfileFragment : Fragment() {
     }
 
     private fun buscarDados() {
-        nome = mUsuario?.displayName
+        //Reload antes de buscar as informações para certificar de que elas estejam atualizadas
         mUsuario?.reload()
+        nome = mUsuario?.displayName
         emailVerificado = mUsuario?.isEmailVerified
+    }
+
+    override fun onCreateOptionsMenu(menu: Menu?, inflater: MenuInflater?) {
+        // Inflate the menu to use in the action bar
+        menu?.clear()
+        val inflater = activity?.menuInflater
+        inflater?.inflate(R.menu.profile_menu, menu)
+        return
     }
 }

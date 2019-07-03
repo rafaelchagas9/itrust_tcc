@@ -109,7 +109,7 @@ class LoginActivity : AppCompatActivity() {
     }
 
     private fun updateUi() {
-        val intent = Intent(this@LoginActivity, MainActivity::class.java)
+        val intent = Intent(this@LoginActivity, PermissaoActivity::class.java)
         intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP)
         startActivity(intent)
         this.finish()

@@ -8,10 +8,11 @@
          location permissions for the 'MyLocation' functionality.
     -->
     <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
-    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE"/>
-    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE"/>
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+
     <dist:module dist:instant="true" />
 
     <supports-screens
@@ -28,8 +29,9 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".ui.atividades.MainActivity">
-        </activity>
+        <activity android:name=".ui.atividades.SearchActivity"></activity>
+        <activity android:name=".ui.atividades.PermissaoActivity" />
+        <activity android:name=".ui.atividades.MainActivity" />
         <!--
              The API key for Google Maps-based APIs is defined as a string resource.
              (See the file "res/values/google_maps_api.xml").
@@ -41,11 +43,14 @@
         <meta-data
             android:name="com.google.android.geo.API_KEY"
             android:value="@string/google_maps_key" />
+
         <activity android:name=".ui.atividades.EsqueceSenhaActivity" />
-        <activity android:name=".ui.atividades.CriarContaActivity"
-            android:windowSoftInputMode="stateHidden"/>
-        <activity android:name=".ui.atividades.LoginActivity"
-            android:windowSoftInputMode="stateHidden"/>
+        <activity
+            android:name=".ui.atividades.CriarContaActivity"
+            android:windowSoftInputMode="stateHidden" />
+        <activity
+            android:name=".ui.atividades.LoginActivity"
+            android:windowSoftInputMode="stateHidden" />
         <activity android:name=".ui.atividades.SplashActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

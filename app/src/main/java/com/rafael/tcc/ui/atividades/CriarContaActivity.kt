@@ -169,7 +169,7 @@ class CriarContaActivity : AppCompatActivity() {
 
     private fun updateUserInfoUi() {
         Toast.makeText(this,"Cadastrado com sucesso, por favor, verifique seu e-mail", Toast.LENGTH_SHORT).show()
-        val intent = Intent(this@CriarContaActivity, MainActivity::class.java)
+        val intent = Intent(this@CriarContaActivity, PermissaoActivity::class.java)
         intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP)
         startActivity(intent)
     }

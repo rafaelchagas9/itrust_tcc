@@ -33,7 +33,7 @@ class SplashActivity : AppCompatActivity() {
         val mUsuario = mAuth!!.currentUser
         //Verificando se já existe algum usuário logado no dispositivo
         if (mUsuario!=null){
-            val intent = Intent(this, MainActivity::class.java)
+            val intent = Intent(this, PermissaoActivity::class.java)
             Handler().postDelayed({
                 intent.change()
 

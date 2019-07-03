@@ -1,23 +1,16 @@
 package com.rafael.tcc.ui;
 
-import android.app.ProgressDialog;
-import android.content.ContentResolver;
 import android.text.Editable;
 import android.text.TextWatcher;
-import android.webkit.MimeTypeMap;
 import android.widget.EditText;
-import android.widget.ProgressBar;
 
-import androidx.annotation.NonNull;
-
-import com.google.android.gms.tasks.OnCompleteListener;
-import com.google.android.gms.tasks.Task;
-import com.google.firebase.storage.StorageReference;
-import com.google.firebase.storage.UploadTask;
-
-import org.jetbrains.annotations.NonNls;
-
-import kotlin.coroutines.Continuation;
+import com.karumi.dexter.Dexter;
+import com.karumi.dexter.PermissionToken;
+import com.karumi.dexter.listener.PermissionDeniedResponse;
+import com.karumi.dexter.listener.PermissionGrantedResponse;
+import com.karumi.dexter.listener.PermissionRequest;
+import com.karumi.dexter.listener.single.PermissionListener;
+import com.mancj.materialsearchbar.MaterialSearchBar;
 
 public abstract class MaskEditUtil {
 
@@ -77,8 +70,6 @@ public abstract class MaskEditUtil {
     public static String unmask(final String s) {
         return s.replaceAll("[.]", "").replaceAll("[-]", "").replaceAll("[/]", "").replaceAll("[(]", "").replaceAll("[ ]","").replaceAll("[:]", "").replaceAll("[)]", "");
     }
-
-
 }
 
 
