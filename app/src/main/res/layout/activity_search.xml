@@ -20,7 +20,7 @@
 
     <com.mancj.materialsearchbar.MaterialSearchBar
         style="@style/MaterialSearchBarLight"
-        app:mt_speechMode="false"
+        app:mt_speechMode="true"
         app:mt_hint="Insira um local ou endereço"
         app:mt_maxSuggestionsCount="10"
         android:layout_width="match_parent"
@@ -38,7 +38,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
-        android:text="Selecionar Local"
+        android:text="Confirmar Local"
         android:background="@drawable/search_button_bg"
         android:textColor="@color/colorPrimary"
         android:layout_margin="16dp"

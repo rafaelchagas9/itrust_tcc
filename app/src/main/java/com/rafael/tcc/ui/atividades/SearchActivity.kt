@@ -26,6 +26,13 @@ import com.mancj.materialsearchbar.adapter.SuggestionsAdapter
 import com.rafael.tcc.R
 import com.rafael.tcc.ui.Local
 import kotlinx.android.synthetic.main.activity_search.*
+import android.content.Intent
+import android.content.IntentSender
+import android.util.DisplayMetrics
+import android.view.ViewAnimationUtils
+import com.google.android.gms.common.api.ResolvableApiException
+import com.google.android.libraries.places.internal.dp
+import kotlin.math.ceil
 
 
 class SearchActivity : AppCompatActivity(), OnMapReadyCallback {
@@ -38,9 +45,14 @@ class SearchActivity : AppCompatActivity(), OnMapReadyCallback {
     var locationCallback: LocationCallback? = null
     var predictionsList: MutableList<AutocompletePrediction> = ArrayList()
 
+    var urlFoto: String?= null
+    var nomeLugar: String? = null
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_search)
+
+        createLocationRequest()
 
         val mapFragment = supportFragmentManager.findFragmentById(R.id.map_pesquisar) as SupportMapFragment?
         mapFragment?.getMapAsync(this)
@@ -61,7 +73,7 @@ class SearchActivity : AppCompatActivity(), OnMapReadyCallback {
 
             override fun onSearchConfirmed(text: CharSequence?) {
                 startSearch(text.toString(), true, null, true)
-            }
+            }   
         })
 
         searchBar.setSuggestionsClickListener(object: SuggestionsAdapter.OnItemViewClickListener{
@@ -85,22 +97,22 @@ class SearchActivity : AppCompatActivity(), OnMapReadyCallback {
                 val placeId = selectedPrediction.placeId
                 //A linha abaixo pode ser usada pra obter qualquer informação sobre o local
                 val placeFields: List<Place.Field> = listOf(Place.Field.LAT_LNG, Place.Field.NAME, Place.Field.TYPES,
-                        Place.Field.ADDRESS, Place.Field.PHOTO_METADATAS, Place.Field.PHONE_NUMBER)
+                        Place.Field.ADDRESS, Place.Field.PHOTO_METADATAS)
                 val fetchPlaceRequest: FetchPlaceRequest = FetchPlaceRequest.builder(placeId, placeFields).build()
                 placesClient!!.fetchPlace(fetchPlaceRequest)
                         .addOnSuccessListener {fetchPlaceResponse: FetchPlaceResponse? ->
                             val place: Place? = fetchPlaceResponse?.place
-                            var fotoTeste: String? = (place?.photoMetadatas?.get(0)).toString()
-                            var conver: String? = fotoTeste?.substring(fotoTeste.lastIndexOf(" ") + 16)
-                            Log.i("SearchActivity", "Lugar encontrado"+ (place?.photoMetadatas?.get(0)))
-                            Log.i("SearchActivity", "Lugar encontrado"+ fotoTeste)
-                            Log.i("SearchActivity", "Lugar encontrado"+ conver)
+                            val primeiraFotoMetadata: String? = (place?.photoMetadatas?.get(0).toString())
+                            val conver: String? = primeiraFotoMetadata?.substring(primeiraFotoMetadata.lastIndexOf(" ") + 16)?.replace("}", "")
+                            urlFoto = "https://maps.googleapis.com/maps/api/place/photo?photoreference=$conver&sensor=false&maxheight=406&maxwidth=576&key=AIzaSyDcKodtmFJ9lclROlcSifa8coLbwDyGCBs"
+                            nomeLugar = place?.name
+                            Log.i("SearchActivity", "Lugar encontrado $urlFoto")
                             val latLngPlace: LatLng? = place?.latLng
                             if (latLngPlace!=null){
                                 mMap?.moveCamera(CameraUpdateFactory.newLatLngZoom(latLngPlace, 18F))
                                 Log.e("FDAS", ""+latLngPlace)
-                                val lugar = Local(place.latLng!!, place.name!!, place.photoMetadatas!!,
-                                        place.types!!, place.address!!, place.phoneNumber!!)
+                                val lugar = Local(latLngPlace, place.name!!, urlFoto!!,
+                                        place.types!!, place.address!!)
                             }
                         }
                         .addOnFailureListener{exception ->
@@ -124,6 +136,7 @@ class SearchActivity : AppCompatActivity(), OnMapReadyCallback {
 
             override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {
                 val predictionsRequest: FindAutocompletePredictionsRequest = FindAutocompletePredictionsRequest.builder()
+                        .setCountry("br")
                         .setTypeFilter(TypeFilter.ESTABLISHMENT)
                         .setSessionToken(token)
                         .setQuery(s.toString())
@@ -151,6 +164,18 @@ class SearchActivity : AppCompatActivity(), OnMapReadyCallback {
             }
         }
         )
+
+        btn_selecionar_local.setOnClickListener{
+            if (nomeLugar!=null){
+                val i = Intent(this, TesteActivity::class.java)
+                i.putExtra("URL", urlFoto)
+                i.putExtra("Nome", nomeLugar)
+                startActivity(i)
+            }else {
+                Toast.makeText(this, "Por favor, selecione um local válido", Toast.LENGTH_SHORT).show()
+            }
+
+        }
 
     }
     @SuppressLint("MissingPermission")
@@ -215,6 +240,39 @@ class SearchActivity : AppCompatActivity(), OnMapReadyCallback {
                     Toast.makeText(this, "Não foi possível obter a localização", Toast.LENGTH_LONG).show()
                 }
     }
-}
+    fun createLocationRequest() {
+        val locationRequest = LocationRequest.create()?.apply {
+            interval = 10000
+            fastestInterval = 5000
+            priority = LocationRequest.PRIORITY_HIGH_ACCURACY
+        }
+        val builder = LocationSettingsRequest.Builder()
+                .addLocationRequest(locationRequest!!)
+
+// ...
+
+        val client: SettingsClient = LocationServices.getSettingsClient(this)
+        val task: Task<LocationSettingsResponse> = client.checkLocationSettings(builder.build())
+        task.addOnSuccessListener { locationSettingsResponse ->
+            // All location settings are satisfied. The client can initialize
+            // location requests here.
+            // ...
+        }
+
+        task.addOnFailureListener { exception ->
+            if (exception is ResolvableApiException){
+                // A localização não está ativa ou não está no modo alta precisão,
+                // mas isso pode ser resolvido através de uma caixa de diálogo.
+                try {
+                    // Exibe a caixa de diálogo para o usuário ativar o GPS,
+                    exception.startResolutionForResult(this@SearchActivity, 61124)
+                } catch (sendEx: IntentSender.SendIntentException) {
+                }
+            }
+        }
+    }
+
+    }
+
 
 

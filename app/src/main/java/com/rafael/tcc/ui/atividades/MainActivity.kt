@@ -64,8 +64,6 @@ class MainActivity : AppCompatActivity() {
         //Definindo o fragmento a ser exibido através do id do item selecionado no menu
         when (item.itemId) {
             R.id.navigation_home -> fragmentoSelecionado = HomeFragment()
-            R.id.navigation_search -> {fragmentoSelecionado = MapFragment()
-                createLocationRequest()}
             R.id.navigation_favorites -> fragmentoSelecionado = FavoriteFragment()
             R.id.navigation_perfil -> fragmentoSelecionado = ProfileFragment()
         }
@@ -84,38 +82,6 @@ class MainActivity : AppCompatActivity() {
         intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP)
         startActivity(intent)
         this.finish()
-    }
-
-    fun createLocationRequest() {
-        val locationRequest = LocationRequest.create()?.apply {
-            interval = 10000
-            fastestInterval = 5000
-            priority = LocationRequest.PRIORITY_HIGH_ACCURACY
-        }
-        val builder = LocationSettingsRequest.Builder()
-                .addLocationRequest(locationRequest!!)
-
-// ...
-
-        val client: SettingsClient = LocationServices.getSettingsClient(this)
-        val task: Task<LocationSettingsResponse> = client.checkLocationSettings(builder.build())
-        task.addOnSuccessListener { locationSettingsResponse ->
-            // All location settings are satisfied. The client can initialize
-            // location requests here.
-            // ...
-        }
-
-        task.addOnFailureListener { exception ->
-            if (exception is ResolvableApiException){
-                // A localização não está ativa ou não está no modo alta precisão,
-                // mas isso pode ser resolvido através de uma caixa de diálogo.
-                try {
-                    // Exibe a caixa de diálogo para o usuário ativar o GPS,
-                    exception.startResolutionForResult(this@MainActivity, 61124)
-                } catch (sendEx: IntentSender.SendIntentException) {
-                }
-            }
-        }
     }
 
 }

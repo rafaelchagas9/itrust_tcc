@@ -106,8 +106,9 @@ class CriarContaActivity : AppCompatActivity() {
         estado = spinner_estado?.selectedItem.toString()
         condicao = spinner_condicao?.selectedItem.toString()
 
-        if(!TextUtils.isEmpty(primeiro_nome) && !TextUtils.isEmpty(email) && !TextUtils.isEmpty(senha) &&
-                !TextUtils.isEmpty(estado)){
+        if(!TextUtils.isEmpty(primeiro_nome) && !TextUtils.isEmpty(sobrenome) && !TextUtils.isEmpty(email)
+                && !TextUtils.isEmpty(cidade) && !TextUtils.isEmpty(dataNasc) && !TextUtils.isEmpty(senha) &&
+                !TextUtils.isEmpty(estado) && !TextUtils.isEmpty(condicao) ){
             note_list_progress?.visibility = ProgressBar.VISIBLE
 
             mAuth!!.createUserWithEmailAndPassword(email!!, senha!!).addOnCompleteListener(this){ task ->
@@ -146,12 +147,12 @@ class CriarContaActivity : AppCompatActivity() {
         val currentUserDb = mDatabaseReference!!.child(userId)
         currentUserDb.child("Primeiro Nome").setValue(primeiro_nome)
         currentUserDb.child("Sobrenome").setValue(sobrenome)
-        currentUserDb.child("Nome Completo").setValue(primeiro_nome+sobrenome)
+        currentUserDb.child("Nome Completo").setValue("$primeiro_nome $sobrenome")
         currentUserDb.child("Data de nascimento").setValue(dataNasc)
         currentUserDb.child("Estado").setValue(estado)
         currentUserDb.child("Cidade").setValue(cidade)
         currentUserDb.child("Email").setValue(email)
-        currentUserDb.child("Foto").setValue(fotoSelecionadaUri)
+        currentUserDb.child("Condição").setValue(condicao)
 
     }
 
@@ -159,11 +160,11 @@ class CriarContaActivity : AppCompatActivity() {
         val mUsuario = mAuth!!.currentUser
         mUsuario!!.sendEmailVerification().addOnCompleteListener(this){ task ->
             if(task.isSuccessful){
-                Toast.makeText(this@CriarContaActivity, "Email de verificação enviado para"+mUsuario.getEmail(), Toast.LENGTH_LONG).show()
+                Toast.makeText(this@CriarContaActivity, "Email de verificação enviado para"+mUsuario.email, Toast.LENGTH_LONG).show()
             } else{
                 Log.e(TAG, "SendEmailVerification", task.exception)
                 Toast.makeText(this@CriarContaActivity, "Falha ao enviar o email de verificação", Toast.LENGTH_SHORT).show()
-            }
+              }
         }
     }
 

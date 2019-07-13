@@ -62,7 +62,7 @@ class ProfileFragment : Fragment() {
         }else{
             view.tv_emailVerificado.text="Por favor verifique seu e-mail para ter acesso a todas as funcionalidades"
         }
-        view.tv_boasVindas.text = view.tv_boasVindas.text.toString()+" "+(nome)
+        view.tv_boasVindas.text = view.tv_boasVindas.text.toString() + """ """ + nome
 
 
         //Listeners
@@ -130,13 +130,5 @@ class ProfileFragment : Fragment() {
         mUsuario?.reload()
         nome = mUsuario?.displayName
         emailVerificado = mUsuario?.isEmailVerified
-    }
-
-    override fun onCreateOptionsMenu(menu: Menu?, inflater: MenuInflater?) {
-        // Inflate the menu to use in the action bar
-        menu?.clear()
-        val inflater = activity?.menuInflater
-        inflater?.inflate(R.menu.profile_menu, menu)
-        return
     }
 }
