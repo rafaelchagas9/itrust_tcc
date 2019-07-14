@@ -1,6 +1,7 @@
 package com.rafael.tcc.ui.atividades
 
 import android.annotation.SuppressLint
+import android.app.Activity
 import android.content.Context
 import android.location.Location
 import android.os.Bundle
@@ -24,15 +25,15 @@ import com.google.android.libraries.places.api.net.*
 import com.mancj.materialsearchbar.MaterialSearchBar
 import com.mancj.materialsearchbar.adapter.SuggestionsAdapter
 import com.rafael.tcc.R
-import com.rafael.tcc.ui.Local
 import kotlinx.android.synthetic.main.activity_search.*
 import android.content.Intent
 import android.content.IntentSender
-import android.util.DisplayMetrics
-import android.view.ViewAnimationUtils
+import android.provider.MediaStore
+import android.speech.RecognizerIntent
 import com.google.android.gms.common.api.ResolvableApiException
-import com.google.android.libraries.places.internal.dp
-import kotlin.math.ceil
+import kotlinx.android.synthetic.main.fragment_profile.view.*
+import java.util.*
+import kotlin.collections.ArrayList
 
 
 class SearchActivity : AppCompatActivity(), OnMapReadyCallback {
@@ -47,6 +48,10 @@ class SearchActivity : AppCompatActivity(), OnMapReadyCallback {
 
     var urlFoto: String?= null
     var nomeLugar: String? = null
+    var endLugar: String? = null
+    var foneLugar: String? = null
+    var horaLugar: String? = null
+    var siteLugar: String? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -65,6 +70,9 @@ class SearchActivity : AppCompatActivity(), OnMapReadyCallback {
                 if (buttonCode == MaterialSearchBar.BUTTON_BACK){
                     searchBar.disableSearch()
                 }
+                if (buttonCode == MaterialSearchBar.BUTTON_SPEECH){
+                    openVoiceRecognizer()
+                }
             }
 
             override fun onSearchStateChanged(enabled: Boolean) {
@@ -78,7 +86,6 @@ class SearchActivity : AppCompatActivity(), OnMapReadyCallback {
 
         searchBar.setSuggestionsClickListener(object: SuggestionsAdapter.OnItemViewClickListener{
             override fun OnItemDeleteListener(position: Int, v: View?) {
-
             }
 
             override fun OnItemClickListener(position: Int, v: View?) {
@@ -97,7 +104,8 @@ class SearchActivity : AppCompatActivity(), OnMapReadyCallback {
                 val placeId = selectedPrediction.placeId
                 //A linha abaixo pode ser usada pra obter qualquer informação sobre o local
                 val placeFields: List<Place.Field> = listOf(Place.Field.LAT_LNG, Place.Field.NAME, Place.Field.TYPES,
-                        Place.Field.ADDRESS, Place.Field.PHOTO_METADATAS)
+                        Place.Field.ADDRESS, Place.Field.PHOTO_METADATAS, Place.Field.PHONE_NUMBER, Place.Field.OPENING_HOURS,
+                        Place.Field.WEBSITE_URI)
                 val fetchPlaceRequest: FetchPlaceRequest = FetchPlaceRequest.builder(placeId, placeFields).build()
                 placesClient!!.fetchPlace(fetchPlaceRequest)
                         .addOnSuccessListener {fetchPlaceResponse: FetchPlaceResponse? ->
@@ -105,14 +113,16 @@ class SearchActivity : AppCompatActivity(), OnMapReadyCallback {
                             val primeiraFotoMetadata: String? = (place?.photoMetadatas?.get(0).toString())
                             val conver: String? = primeiraFotoMetadata?.substring(primeiraFotoMetadata.lastIndexOf(" ") + 16)?.replace("}", "")
                             urlFoto = "https://maps.googleapis.com/maps/api/place/photo?photoreference=$conver&sensor=false&maxheight=406&maxwidth=576&key=AIzaSyDcKodtmFJ9lclROlcSifa8coLbwDyGCBs"
-                            nomeLugar = place?.name
+                            if(place?.name!=null) nomeLugar = place.name
+                            if(place?.address!=null) endLugar = place.address
+                            if(place?.phoneNumber!=null) foneLugar = place.phoneNumber
+                            if(place?.openingHours!=null) horaLugar = place.openingHours.toString()
+                            if(place?.websiteUri!=null) siteLugar = place.websiteUri.toString()
                             Log.i("SearchActivity", "Lugar encontrado $urlFoto")
                             val latLngPlace: LatLng? = place?.latLng
                             if (latLngPlace!=null){
                                 mMap?.moveCamera(CameraUpdateFactory.newLatLngZoom(latLngPlace, 18F))
                                 Log.e("FDAS", ""+latLngPlace)
-                                val lugar = Local(latLngPlace, place.name!!, urlFoto!!,
-                                        place.types!!, place.address!!)
                             }
                         }
                         .addOnFailureListener{exception ->
@@ -135,6 +145,10 @@ class SearchActivity : AppCompatActivity(), OnMapReadyCallback {
             }
 
             override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {
+                //Verificando se o campo de pesquisa está vazio, se estiver, as sugestões são cleared
+                if (count == 0){
+                    searchBar.clearSuggestions()
+                }
                 val predictionsRequest: FindAutocompletePredictionsRequest = FindAutocompletePredictionsRequest.builder()
                         .setCountry("br")
                         .setTypeFilter(TypeFilter.ESTABLISHMENT)
@@ -166,18 +180,51 @@ class SearchActivity : AppCompatActivity(), OnMapReadyCallback {
         )
 
         btn_selecionar_local.setOnClickListener{
+            val i = Intent(this, PaginaLugarActivity::class.java)
             if (nomeLugar!=null){
-                val i = Intent(this, TesteActivity::class.java)
-                i.putExtra("URL", urlFoto)
-                i.putExtra("Nome", nomeLugar)
-                startActivity(i)
             }else {
                 Toast.makeText(this, "Por favor, selecione um local válido", Toast.LENGTH_SHORT).show()
             }
-
+            //Verificando se algum campo está nulo, se sim, o programa atribui o valor "404"
+            //para que seja fácil identificar e fazer o tratamento necessário
+            if (urlFoto!=null){
+            }else{
+                urlFoto="404"
+            }
+            if (endLugar!=null){
+            }else{
+                endLugar="404"
+            }
+            if (foneLugar!=null){
+            }else{
+                foneLugar="404"
+            }
+            if (horaLugar!=null){
+            }else{
+                horaLugar="404"
+            }
+            if (siteLugar!=null){
+            }else{
+                siteLugar="404"
+            }
+            i.putExtra("Nome", nomeLugar)
+            i.putExtra("Endereco", endLugar)
+            i.putExtra("Fone", foneLugar)
+            i.putExtra("Hora", horaLugar)
+            i.putExtra("Site", siteLugar)
+            i.putExtra("URL", urlFoto)
+            startActivity(i)
         }
 
     }
+
+    private fun openVoiceRecognizer() {
+        val intent = Intent(RecognizerIntent.ACTION_RECOGNIZE_SPEECH)
+        intent.putExtra(RecognizerIntent.EXTRA_LANGUAGE_MODEL, RecognizerIntent.LANGUAGE_MODEL_FREE_FORM)
+        intent.putExtra(RecognizerIntent.EXTRA_LANGUAGE, Locale.getDefault())
+        startActivityForResult(intent, 10)
+    }
+
     @SuppressLint("MissingPermission")
     override fun onMapReady(googleMap: GoogleMap?) {
         MapsInitializer.initialize(this)
@@ -269,6 +316,16 @@ class SearchActivity : AppCompatActivity(), OnMapReadyCallback {
                 } catch (sendEx: IntentSender.SendIntentException) {
                 }
             }
+        }
+    }
+
+    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
+        super.onActivityResult(requestCode, resultCode, data)
+        //Verificando se o usuário selecionou alguma imagem e se a seleção deu certo
+        if (requestCode == 10 && resultCode == Activity.RESULT_OK && data != null){
+            val resultadoFala = ArrayList<String>(data.getStringArrayListExtra(RecognizerIntent.EXTRA_RESULTS))
+            searchBar.enableSearch()
+            searchBar.text = resultadoFala[0]
         }
     }
 

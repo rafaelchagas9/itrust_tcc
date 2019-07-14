@@ -11,15 +11,15 @@
         android:id="@+id/btn_FotoPerfil"
         android:layout_width="150dp"
         android:layout_height="150dp"
-        android:text="Selecione uma imagem"
         android:textColor="@color/colorAccent"
         android:background="@drawable/rounded_select_photo_button"
-
-        android:layout_marginTop="8dp"
         android:layout_alignParentTop="true"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentRight="true"
-        android:layout_centerInParent="true"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentEnd="true"
+        android:layout_marginStart="105dp"
+        android:layout_marginTop="0dp"
+        android:layout_marginEnd="118dp"
+        android:layout_marginBottom="5dp"
         android:alpha="00"
         />
 
@@ -43,7 +43,7 @@
         android:textSize="30sp"
         android:textColor="@color/colorAccent"
         android:layout_marginTop="8dp"
-        android:layout_marginLeft="5dp" />
+        android:layout_marginStart="5dp" />
 
     <androidx.appcompat.widget.AppCompatTextView
         android:id="@+id/tv_emailVerificado"
@@ -71,10 +71,9 @@
         android:id="@+id/cv_FotoPerfil"
         android:layout_width="150dp"
         android:layout_height="150dp"
-        android:layout_alignStart="@+id/btn_FotoPerfil"
-        android:layout_alignTop="@+id/btn_FotoPerfil"
-        android:layout_alignEnd="@+id/btn_FotoPerfil"
-        android:layout_alignBottom="@+id/btn_FotoPerfil"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentEnd="true"
         android:layout_marginStart="105dp"
         android:layout_marginTop="0dp"
         android:layout_marginEnd="118dp"

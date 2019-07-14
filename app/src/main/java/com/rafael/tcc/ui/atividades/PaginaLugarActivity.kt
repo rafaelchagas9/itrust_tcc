@@ -7,7 +7,7 @@ import com.squareup.picasso.Picasso
 import kotlinx.android.synthetic.main.activity_teste.*
 
 
-class TesteActivity : AppCompatActivity() {
+class PaginaLugarActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
