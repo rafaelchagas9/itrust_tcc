@@ -13,6 +13,7 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.UserProfileChangeRequest
+import com.google.firebase.database.FirebaseDatabase
 import com.google.firebase.storage.FirebaseStorage
 import com.rafael.tcc.R
 import com.squareup.picasso.Picasso
@@ -116,6 +117,11 @@ class ProfileFragment : Fragment() {
         val profileUpdates = UserProfileChangeRequest.Builder()
                 .setPhotoUri(fotoSelecionadaUri)
                 .build()
+        val mDatabase = FirebaseDatabase.getInstance()
+        val mDatabaseReference = mDatabase.reference.child("Users")
+        val userId = mAuth!!.currentUser!!.uid
+        val currentUserDb = mDatabaseReference.child(userId)
+        currentUserDb.child("UrlFoto").setValue(fotoSelecionadaUri.toString())
         mUsuario?.updateProfile(profileUpdates)
                 ?.addOnSuccessListener {
                     Toast.makeText(activity, "Foto de perfil atualizada com sucesso", Toast.LENGTH_LONG).show()

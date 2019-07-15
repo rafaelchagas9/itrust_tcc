@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <item android:id="@+id/menu_action_nova_mensagem"
+        android:title="Nova mensagem"
+        app:showAsAction="ifRoom"/>
+
+    <item android:id="@+id/menu_action_sair"
+        android:title="Sair"
+        app:showAsAction="ifRoom"/>
+
+</menu>

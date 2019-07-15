@@ -1,9 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
 <menu xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:android="http://schemas.android.com/apk/res/android">
-    <item android:title="Mudar Senha"/>
-    <item android:title="Configurações"
+    <item android:title="Mudar Senha"
+        android:id="@+id/action_mudar_senha"/>
+    <item
+        android:title="Configurações"
+        android:id="@+id/action_configuracoes"
         app:showAsAction="always"
-        android:icon="@drawable/ic_settings_black_24dp"></item>
-    <item android:title="Sair"></item>
+        android:icon="@drawable/ic_settings_black_24dp" />
+    <item android:title="Sair"
+        android:id="@+id/action_sair"></item>
 </menu>

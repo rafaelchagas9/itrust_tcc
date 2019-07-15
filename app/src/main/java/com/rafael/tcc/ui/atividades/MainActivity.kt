@@ -34,7 +34,7 @@ class MainActivity : AppCompatActivity() {
         setContentView(R.layout.activity_main)
 
         //Declaração do navigation view e declaração do Listener
-        val bottomNav = findViewById<BottomNavigationView>(com.rafael.tcc.R.id.bottom_nav_view)
+        val bottomNav = findViewById<BottomNavigationView>(R.id.bottom_nav_view)
         bottomNav.setOnNavigationItemSelectedListener(navListener)
 
         //Definindo que o programa deve iniciar com o Fragmento Home e não em branco

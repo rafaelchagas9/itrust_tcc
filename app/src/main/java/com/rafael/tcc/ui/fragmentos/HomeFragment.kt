@@ -8,7 +8,9 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import com.rafael.tcc.R
+import com.rafael.tcc.ui.LatestMessageRow
 import com.rafael.tcc.ui.atividades.SearchActivity
+import com.rafael.tcc.ui.atividades.mensagens.LatestMessagesActivity
 import kotlinx.android.synthetic.main.fragment_home.view.*
 
 class HomeFragment : Fragment() {
@@ -18,6 +20,12 @@ class HomeFragment : Fragment() {
         view.fab_pesquisar.setOnClickListener {
 
             Intent(activity, SearchActivity::class.java).apply {
+                val transitionActivityOptions = ActivityOptions.makeSceneTransitionAnimation(activity, view, getString(R.string.roundedColorView_transitionName))
+                startActivity(this, transitionActivityOptions.toBundle())
+            }
+        }
+        view.fab_chat.setOnClickListener{
+            Intent(activity, LatestMessagesActivity::class.java).apply {
                 val transitionActivityOptions = ActivityOptions.makeSceneTransitionAnimation(activity, view, getString(R.string.roundedColorView_transitionName))
                 startActivity(this, transitionActivityOptions.toBundle())
             }

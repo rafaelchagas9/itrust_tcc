@@ -33,7 +33,21 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".ui.atividades.PaginaLugarActivity"></activity>
+        <activity android:name=".ui.atividades.mensagens.ChatLogActivity"
+            android:parentActivityName=".ui.atividades.mensagens.LatestMessagesActivity">
+            <meta-data
+                android:name="androidx.support.PARENT_ACTIVITY"
+                android:value=".ui.atividades.LatestMessagesActivity" />
+        </activity>
+        <activity
+            android:name=".ui.atividades.mensagens.NewMessageActivity"
+            android:parentActivityName=".ui.atividades.mensagens.LatestMessagesActivity">
+            <meta-data
+                android:name="androidx.support.PARENT_ACTIVITY"
+                android:value=".ui.atividades.LatestMessagesActivity" />
+        </activity>
+        <activity android:name=".ui.atividades.mensagens.LatestMessagesActivity" />
+        <activity android:name=".ui.atividades.PaginaLugarActivity" />
         <activity android:name=".ui.atividades.SearchActivity" />
         <activity android:name=".ui.atividades.PermissaoActivity" />
         <activity android:name=".ui.atividades.MainActivity" />

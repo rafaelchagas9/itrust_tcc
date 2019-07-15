@@ -145,14 +145,15 @@ class CriarContaActivity : AppCompatActivity() {
         mUsuario?.updateProfile(profileUpdates)
 
         val currentUserDb = mDatabaseReference!!.child(userId)
-        currentUserDb.child("Primeiro Nome").setValue(primeiro_nome)
+        currentUserDb.child("uid").setValue(userId)
+        currentUserDb.child("Primeiro_Nome").setValue(primeiro_nome)
         currentUserDb.child("Sobrenome").setValue(sobrenome)
-        currentUserDb.child("Nome Completo").setValue("$primeiro_nome $sobrenome")
-        currentUserDb.child("Data de nascimento").setValue(dataNasc)
+        currentUserDb.child("Nome_Completo").setValue("$primeiro_nome $sobrenome")
+        currentUserDb.child("Data_de_nascimento").setValue(dataNasc)
         currentUserDb.child("Estado").setValue(estado)
         currentUserDb.child("Cidade").setValue(cidade)
         currentUserDb.child("Email").setValue(email)
-        currentUserDb.child("Condição").setValue(condicao)
+        currentUserDb.child("Condicao").setValue(condicao)
 
     }
 
