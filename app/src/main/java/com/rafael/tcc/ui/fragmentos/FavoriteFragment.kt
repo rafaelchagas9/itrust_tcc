@@ -13,6 +13,7 @@ import com.google.firebase.database.DatabaseReference
 import com.google.firebase.database.FirebaseDatabase
 import com.rafael.tcc.R
 import com.rafael.tcc.ui.atividades.LoginActivity
+import kotlinx.android.synthetic.main.fragment_profile.*
 
 /**
  * A simple [Fragment] subclass.
@@ -20,11 +21,10 @@ import com.rafael.tcc.ui.atividades.LoginActivity
  */
 class FavoriteFragment : Fragment() {
 
-    private var mDatabaseReference: DatabaseReference? = null
-    private var mDatabase: FirebaseDatabase? = null
-    private var mAuth: FirebaseAuth? = null
+
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         return inflater.inflate(R.layout.fragment_favorites, container, false)
+
     }
 }

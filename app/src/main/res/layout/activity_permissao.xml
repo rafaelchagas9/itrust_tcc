@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".ui.atividades.PermissaoActivity"
+    android:padding="32dp"
+    android:background="@drawable/login_bg">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:gravity="center">
+
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@mipmap/logo" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Permissão necessária"
+            android:textSize="24sp"
+            android:fontFamily="sans-serif-condensed"
+            android:textStyle="bold"
+            android:textColor="#FFFFFF"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="O app iTrust necessita do acesso a localização do aparelho para sugerir e
+mostrar locais próximos a você"
+            android:gravity="center_horizontal"
+            android:layout_marginTop="36dp"
+            android:textColor="#FFFFFF"/>
+
+    </LinearLayout>
+
+    <Button
+        android:id="@+id/btn_permitir"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Permitir"
+        android:background="@drawable/login_button_bg"
+        android:textColor="#FFFFFF"
+        android:layout_alignParentBottom="true"
+        android:textAllCaps="false"/>
+
+</RelativeLayout>

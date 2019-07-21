@@ -4,6 +4,14 @@ import android.text.Editable;
 import android.text.TextWatcher;
 import android.widget.EditText;
 
+import com.karumi.dexter.Dexter;
+import com.karumi.dexter.PermissionToken;
+import com.karumi.dexter.listener.PermissionDeniedResponse;
+import com.karumi.dexter.listener.PermissionGrantedResponse;
+import com.karumi.dexter.listener.PermissionRequest;
+import com.karumi.dexter.listener.single.PermissionListener;
+import com.mancj.materialsearchbar.MaterialSearchBar;
+
 public abstract class MaskEditUtil {
 
     public static final String FORMAT_CPF = "###.###.###-##";
