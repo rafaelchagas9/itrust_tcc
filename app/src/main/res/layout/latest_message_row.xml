@@ -17,7 +17,7 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:civ_border_width="2dp"
-        app:srcCompat="@drawable/ic_account_circle_black_24dp" />
+        android:src="@mipmap/user" />
 
     <TextView
         android:id="@+id/textview_nome_latest_message"
@@ -42,6 +42,8 @@
         android:layout_marginEnd="16dp"
         android:text="Mensagem"
         android:textColor="@color/white"
+        android:maxLines="1"
+        android:ellipsize="end"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.5"

@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">Tcc</string>
+    <string name="app_name">iTrust</string>
     <string name="sobrenome">Sobrenome</string>
     <string-array name="estados">
         <item>Acre</item>
