@@ -23,13 +23,6 @@ class CriarContaActivity : AppCompatActivity() {
     //Elementos da interface gráfica
     //Os componentes Spinner foram declarados na linha 61
     //Porque iniciar aqui estava dando erro
-    private var txt_nome: EditText? = null
-    private var txt_sobrenome: EditText? = null
-    private var txt_email: EditText? = null
-    private var txt_senha: EditText? = null
-    private var txt_cidade: EditText? = null
-    private var txt_dataNasc: EditText? = null
-    private var btn_criar_conta: Button? = null
     private var note_list_progress: ProgressBar? = null
 
     //Referências ao banco de dados
@@ -40,7 +33,7 @@ class CriarContaActivity : AppCompatActivity() {
     private var TAG = "CriarContaActivity"
 
     //Variáveis globais
-    private var primeiro_nome: String? = null
+    private var primeiroNome: String? = null
     private var sobrenome: String? = null
     private var cidade: String? = null
     private var email: String? = null
@@ -48,7 +41,6 @@ class CriarContaActivity : AppCompatActivity() {
     private var condicao: String? = null
     private var senha: String? = null
     private var dataNasc: String? = null
-    private var fotoSelecionadaUri: String = ""
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -60,26 +52,17 @@ class CriarContaActivity : AppCompatActivity() {
     }
 
     private fun iniciar() {
-        txt_nome = findViewById<EditText>(R.id.txt_nome)
-        txt_senha = findViewById<EditText>(R.id.txt_senha)
-        txt_sobrenome = findViewById(R.id.txt_sobrenome)
-        txt_dataNasc = findViewById(R.id.txt_dataNasc)
-        txt_cidade = findViewById(R.id.txt_cidade)
-        txt_email = findViewById<EditText>(R.id.txt_email)
-        btn_criar_conta = findViewById<Button>(R.id.btn_criar_conta)
         note_list_progress = findViewById<ProgressBar>(R.id.note_list_progress)
 
         //Definindo os valores dos estados brasileiros
-        var estados = findViewById<Spinner>(R.id.spinner_estado)
-        var adapter_estado = ArrayAdapter.createFromResource(this, R.array.estados, R.layout.spinner_item)
-        adapter_estado.setDropDownViewResource(R.layout.spinner_dropdown_item)
-        estados.adapter = adapter_estado
+        val adapterEstado = ArrayAdapter.createFromResource(this, R.array.estados, R.layout.spinner_item)
+        adapterEstado.setDropDownViewResource(R.layout.spinner_dropdown_item)
+        spinner_estado.adapter = adapterEstado
 
         //Definindo as possíveis condições do usuário
-        var condicao = findViewById<Spinner>(R.id.spinner_condicao)
-        var adapter_condicao = ArrayAdapter.createFromResource(this, R.array.condicao, R.layout.spinner_item)
-        adapter_condicao.setDropDownViewResource(R.layout.spinner_dropdown_item)
-        condicao.adapter = adapter_condicao
+        val adapterCondicao = ArrayAdapter.createFromResource(this, R.array.condicao, R.layout.spinner_item)
+        adapterCondicao.setDropDownViewResource(R.layout.spinner_dropdown_item)
+        spinner_condicao.adapter = adapterCondicao
 
 
 
@@ -96,7 +79,7 @@ class CriarContaActivity : AppCompatActivity() {
     }
 
     private fun criarNovaConta() {
-        primeiro_nome = txt_nome?.text.toString()
+        primeiroNome = txt_nome?.text.toString()
         sobrenome = txt_sobrenome?.text.toString()
         email = txt_email?.text.toString()
         senha = txt_senha?.text.toString()
@@ -105,7 +88,7 @@ class CriarContaActivity : AppCompatActivity() {
         estado = spinner_estado?.selectedItem.toString()
         condicao = spinner_condicao?.selectedItem.toString()
 
-        if(!TextUtils.isEmpty(primeiro_nome) && !TextUtils.isEmpty(sobrenome) && !TextUtils.isEmpty(email)
+        if(!TextUtils.isEmpty(primeiroNome) && !TextUtils.isEmpty(sobrenome) && !TextUtils.isEmpty(email)
                 && !TextUtils.isEmpty(cidade) && !TextUtils.isEmpty(dataNasc) && !TextUtils.isEmpty(senha) &&
                 !TextUtils.isEmpty(estado) && !TextUtils.isEmpty(condicao) ){
             note_list_progress?.visibility = ProgressBar.VISIBLE
@@ -139,15 +122,15 @@ class CriarContaActivity : AppCompatActivity() {
         val userId = mAuth!!.currentUser!!.uid
         val mUsuario = mAuth!!.currentUser
         val profileUpdates = UserProfileChangeRequest.Builder()
-                .setDisplayName(primeiro_nome)
+                .setDisplayName(primeiroNome)
                 .build()
         mUsuario?.updateProfile(profileUpdates)
 
         val currentUserDb = mDatabaseReference!!.child(userId)
         currentUserDb.child("uid").setValue(userId)
-        currentUserDb.child("Primeiro_Nome").setValue(primeiro_nome)
+        currentUserDb.child("Primeiro_Nome").setValue(primeiroNome)
         currentUserDb.child("Sobrenome").setValue(sobrenome)
-        currentUserDb.child("Nome_Completo").setValue("$primeiro_nome $sobrenome")
+        currentUserDb.child("Nome_Completo").setValue("$primeiroNome $sobrenome")
         currentUserDb.child("Data_de_nascimento").setValue(dataNasc)
         currentUserDb.child("Estado").setValue(estado)
         currentUserDb.child("Cidade").setValue(cidade)

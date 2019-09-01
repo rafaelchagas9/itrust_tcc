@@ -62,7 +62,7 @@ class ProfileFragment : Fragment() {
         }else{
             view.tv_emailVerificado.text="Por favor verifique seu e-mail para ter acesso a todas as funcionalidades"
         }
-        view.tv_boasVindas.text = view.tv_boasVindas.text.toString() + """ """ + nome
+        view.tv_boasVindas.text = view.tv_boasVindas.text.toString() + """ """ + nome?.capitalize()
 
 
         //Listeners

@@ -15,7 +15,7 @@ class PaginaLugarActivity : AppCompatActivity() {
 
         val b = intent.extras
         val url = b!!.getString("URL")
-        val nome = b!!.getString("Nome") ?: null
+        val nome = b.getString("Nome")
 
         if (url!=null) {
             Picasso

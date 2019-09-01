@@ -19,6 +19,7 @@ import com.crashlytics.android.Crashlytics
 import com.google.firebase.auth.FirebaseAuth
 import com.iTrust.tcc.R
 import io.fabric.sdk.android.Fabric
+import kotlinx.android.synthetic.main.activity_login.*
 
 class LoginActivity : AppCompatActivity() {
 
@@ -29,11 +30,6 @@ class LoginActivity : AppCompatActivity() {
     private var senha: String? = null
 
     //Elementos da interface
-    private var tv_forgot_password: TextView? = null
-    private var edit_email: EditText? = null
-    private var edit_senha: EditText? = null
-    private var btn_login: Button? = null
-    private var btn_criar_conta: Button? = null
     private var mProgressBar: ProgressDialog? = null
 
 
@@ -57,18 +53,7 @@ class LoginActivity : AppCompatActivity() {
         this.statusBarColor = ContextCompat.getColor(baseContext, color)
     }
 
-    fun Intent.change(){
-        startActivity(this)
-        finish()
-
-    }
-
     private fun inicializar(){
-        tv_forgot_password = findViewById<TextView>(R.id.tv_forgot_password)
-        edit_email = findViewById<EditText>(R.id.edit_email)
-        edit_senha = findViewById<EditText>(R.id.edit_senha)
-        btn_login = findViewById<Button>(R.id.btn_login)
-        btn_criar_conta = findViewById<Button>(R.id.btn_criar_conta)
         mProgressBar = ProgressDialog(this)
         mAuth = FirebaseAuth.getInstance()
 

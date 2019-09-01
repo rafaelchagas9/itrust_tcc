@@ -39,7 +39,6 @@ class NewMessageActivity : AppCompatActivity() {
 
     private fun buscarDadosUsuario() {
         val ref = FirebaseDatabase.getInstance().getReference("/Users")
-        Log.e("FDSF", "$ref")
         ref.addListenerForSingleValueEvent(object: ValueEventListener{
             override fun onCancelled(p0: DatabaseError) {
             }

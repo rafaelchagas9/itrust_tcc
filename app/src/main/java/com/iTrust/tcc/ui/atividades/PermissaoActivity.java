@@ -93,9 +93,7 @@ public class PermissaoActivity extends AppCompatActivity {
 
     private boolean checkMapServices(){
         if(isServicesOK()){
-            if(isMapsEnabled()){
-                return true;
-            }
+            return isMapsEnabled();
         }
         return false;
     }
@@ -117,6 +115,7 @@ public class PermissaoActivity extends AppCompatActivity {
     public boolean isMapsEnabled(){
         final LocationManager manager = (LocationManager) getSystemService( Context.LOCATION_SERVICE );
 
+        assert manager != null;
         if ( !manager.isProviderEnabled( LocationManager.GPS_PROVIDER ) ) {
             buildAlertMessageNoGps();
             return false;

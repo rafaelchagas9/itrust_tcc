@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
     android:background="@drawable/login_bg"
     tools:menu="@menu/profile_menu">
 
@@ -11,74 +11,73 @@
         android:id="@+id/btn_FotoPerfil"
         android:layout_width="150dp"
         android:layout_height="150dp"
-        android:textColor="@color/colorAccent"
-        android:background="@drawable/rounded_select_photo_button"
-        android:layout_alignParentTop="true"
-        android:layout_alignParentStart="true"
-        android:layout_alignParentEnd="true"
-        android:layout_marginStart="105dp"
-        android:layout_marginTop="0dp"
-        android:layout_marginEnd="118dp"
-        android:layout_marginBottom="5dp"
         android:alpha="00"
-        />
-
-    <com.google.android.material.floatingactionbutton.FloatingActionButton
-        android:id="@+id/fabSalvarFoto"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignStart="@+id/btn_FotoPerfil"
-        android:layout_alignTop="@+id/btn_FotoPerfil"
-        android:layout_marginStart="100dp"
-        android:layout_marginTop="100dp"
-        android:visibility="gone"
-        android:src="@drawable/ic_done_black_24dp"/>
-
-    <androidx.appcompat.widget.AppCompatTextView
-        android:id="@+id/tv_boasVindas"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Bem vindo(a)"
-        android:layout_below="@+id/btn_FotoPerfil"
-        android:textSize="30sp"
+        android:background="@drawable/rounded_select_photo_button"
         android:textColor="@color/colorAccent"
-        android:layout_marginTop="8dp"
-        android:layout_marginStart="5dp" />
-
-    <androidx.appcompat.widget.AppCompatTextView
-        android:id="@+id/tv_emailVerificado"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text=""
-        android:textSize="15sp"
-        android:layout_below="@+id/tv_boasVindas"
-        android:textColor="@color/colorAccent"
-        android:layout_marginTop="8dp"
-        android:layout_marginLeft="8dp"/>
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/cv_FotoPerfil" />
 
     <androidx.appcompat.widget.AppCompatButton
         android:id="@+id/btn_sair"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_alignParentBottom="true"
-        android:text="Sair"
-        android:onClick="onBtnSairClick"
+        android:layout_marginBottom="8dp"
         android:background="@drawable/sair_button_bg"
+        android:onClick="onBtnSairClick"
+        android:text="Sair"
         android:textColor="@color/colorPrimaryDark"
-        android:layout_marginBottom="10dp"/>
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent" />
+
+    <LinearLayout
+        android:layout_width="410dp"
+        android:layout_height="613dp"
+        android:orientation="vertical"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/cv_FotoPerfil">
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/tv_boasVindas"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="8dp"
+            android:text="Bem vindo(a)"
+            android:textColor="@color/colorAccent"
+            android:textSize="30sp" />
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/tv_emailVerificado"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="8dp"
+            android:text=""
+            android:textColor="@color/colorAccent"
+            android:textSize="15sp" />
+
+    </LinearLayout>
+
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
+        android:id="@+id/fabSalvarFoto"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="94dp"
+        android:layout_marginTop="94dp"
+        android:src="@drawable/ic_done_black_24dp"
+        app:layout_constraintStart_toStartOf="@+id/cv_FotoPerfil"
+        app:layout_constraintTop_toTopOf="@+id/cv_FotoPerfil"
+        android:visibility="gone"/>
 
     <de.hdodenhof.circleimageview.CircleImageView
         android:id="@+id/cv_FotoPerfil"
         android:layout_width="150dp"
         android:layout_height="150dp"
-        android:layout_alignParentTop="true"
-        android:layout_alignParentStart="true"
-        android:layout_alignParentEnd="true"
-        android:layout_marginStart="105dp"
-        android:layout_marginTop="0dp"
-        android:layout_marginEnd="118dp"
-        android:layout_marginBottom="5dp"
+        android:layout_marginTop="16dp"
         android:background="@drawable/ic_account_circle_black_24dp"
-        app:civ_border_width="4dp" />
+        app:civ_border_width="4dp"
+        app:layout_constraintEnd_toEndOf="@+id/btn_FotoPerfil"
+        app:layout_constraintTop_toTopOf="parent" />
 
-</RelativeLayout>
+</androidx.constraintlayout.widget.ConstraintLayout>

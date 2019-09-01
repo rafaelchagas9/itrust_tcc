@@ -37,25 +37,40 @@ class ChatLogActivity : AppCompatActivity() {
         //Ferramenta de análise e relatório de crashes
         Fabric.with(this, Crashlytics())
 
+        configurarActionBar()
+
+        //Configurando o adaptador do recycler view
+        recyclerview_chat_log.adapter = adapter
+
+        carregarMensagens()
+
+        //Evento de clicar no botão enviar
+        botao_enviar_chat_log.setOnClickListener{
+            enviarMensagem()
+        }
+
+        //Zerando a data que está armazenada de outra conversa(Se existir)
+        dataArmazenada=""
+    }
+
+    override fun onRestart() {
+        super.onRestart()
+        carregarMensagens()
+    }
+
+    companion object{
+        var dataArmazenada: String? = "asdf"
+    }
+
+    private fun configurarActionBar() {
         setSupportActionBar(my_toolbar)
         assert(supportActionBar != null)
         supportActionBar!!.setDisplayHomeAsUpEnabled(true)
         val usuario = intent.getParcelableExtra<User>(NewMessageActivity.USER_KEY)
         supportActionBar?.title=usuario.Nome_Completo
-
-
-        recyclerview_chat_log.adapter = adapter
-        procurarMensagens()
-        botao_enviar_chat_log.setOnClickListener{
-            enviarMensagem()
-        }
-        dataArmazenada=""
-    }
-    companion object{
-        var dataArmazenada: String? = ""
     }
 
-    private fun procurarMensagens() {
+    private fun carregarMensagens() {
         val usuario = intent.getParcelableExtra<User>(NewMessageActivity.USER_KEY)
         val fromId = FirebaseAuth.getInstance().uid
         val toId = usuario.uid

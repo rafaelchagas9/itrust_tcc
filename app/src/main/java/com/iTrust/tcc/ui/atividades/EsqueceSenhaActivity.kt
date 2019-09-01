@@ -1,23 +1,18 @@
 package com.iTrust.tcc.ui.atividades
 
 import android.content.Intent
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.text.TextUtils
 import android.util.Log
-import android.widget.Button
-import android.widget.EditText
 import android.widget.Toast
+import androidx.appcompat.app.AppCompatActivity
 import com.google.firebase.auth.FirebaseAuth
 import com.iTrust.tcc.R
+import kotlinx.android.synthetic.main.activity_esquece_senha.*
 
 class EsqueceSenhaActivity : AppCompatActivity() {
 
     private val TAG = "EsqueceSenhaActivity"
-
-    //Elementos da interface
-    private var txt_email: EditText? = null
-    private var btn_recuperar_senha: Button? = null
 
     //Referências ao database
     private var mAuth: FirebaseAuth? =null
@@ -29,11 +24,7 @@ class EsqueceSenhaActivity : AppCompatActivity() {
     }
 
     private fun inicializar() {
-        txt_email = findViewById(R.id.txt_email) as EditText
-        btn_recuperar_senha = findViewById(R.id.btn_recuperar_senha) as Button
-
         mAuth = FirebaseAuth.getInstance()
-
         btn_recuperar_senha!!.setOnClickListener{enviarEmailRecuperacao()}
     }
 
@@ -48,7 +39,7 @@ class EsqueceSenhaActivity : AppCompatActivity() {
                     Toast.makeText(this, mensagem, Toast.LENGTH_SHORT).show()
                     updateUi()
                 }else{
-                    Log.w(TAG, task.exception!!.message)
+                    Log.w(TAG, task.exception?.message)
                     Toast.makeText(this, "Não foi possível enviar o e-mail, por favor, verifique a informação acima",
                             Toast.LENGTH_SHORT).show()
                 }

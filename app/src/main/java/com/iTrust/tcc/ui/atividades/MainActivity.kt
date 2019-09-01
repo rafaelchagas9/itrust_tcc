@@ -16,6 +16,7 @@ import com.iTrust.tcc.ui.fragmentos.FavoriteFragment
 import com.iTrust.tcc.ui.fragmentos.HomeFragment
 import com.iTrust.tcc.ui.fragmentos.ProfileFragment
 import io.fabric.sdk.android.Fabric
+import kotlinx.android.synthetic.main.activity_main.*
 
 
 class MainActivity : AppCompatActivity() {
@@ -33,8 +34,7 @@ class MainActivity : AppCompatActivity() {
         Fabric.with(this, Crashlytics())
 
         //Declaração do navigation view e declaração do Listener
-        val bottomNav = findViewById<BottomNavigationView>(R.id.bottom_nav_view)
-        bottomNav.setOnNavigationItemSelectedListener(navListener)
+        bottom_nav_view.setOnNavigationItemSelectedListener(navListener)
 
         //Definindo que o programa deve iniciar com o Fragmento Home e não em branco
         supportFragmentManager.beginTransaction().replace(R.id.fragment_container, HomeFragment()).commit()

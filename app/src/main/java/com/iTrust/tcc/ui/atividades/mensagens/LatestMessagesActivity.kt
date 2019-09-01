@@ -31,25 +31,34 @@ class LatestMessagesActivity : AppCompatActivity() {
         setContentView(R.layout.activity_latest_messages)
         setSupportActionBar(my_toolbar)
 
+        configurarAdaptador()
+        buscarUsuarioAtual()
+        verificarUltimasMensagens()
+        configurarBotaoNovaMensagem()
+    }
+
+    override fun onRestart() {
+        super.onRestart()
+        buscarUsuarioAtual()
+        verificarUltimasMensagens()
+    }
+
+    private fun configurarBotaoNovaMensagem() {
+        fab_nova_mensagem.setOnClickListener{
+            val intent = Intent(this, NewMessageActivity::class.java)
+            startActivity(intent)
+        }
+    }
+
+    private fun configurarAdaptador() {
         recyclerview_latest_message.adapter=adapter
         recyclerview_latest_message.addItemDecoration(DividerItemDecoration(this, DividerItemDecoration.VERTICAL))
-
         adapter.setOnItemClickListener{item, view ->
             val intent = Intent(this, ChatLogActivity::class.java)
             val row = item as LatestMessageRow
             intent.putExtra(USER_KEY, row.chatPartnerUser)
             startActivity(intent)
         }
-
-        buscarUsuarioAtual()
-        verificarUltimasMensagens()
-
-        fab_nova_mensagem.setOnClickListener{
-            val intent = Intent(this, NewMessageActivity::class.java)
-            startActivity(intent)
-        }
-
-
     }
 
     val mapaUltimasMensagens = HashMap<String, ChatMessage>()
