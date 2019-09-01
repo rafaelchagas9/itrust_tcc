@@ -25,9 +25,11 @@ class HomeFragment : Fragment() {
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         val view: View = inflater.inflate(R.layout.fragment_home, container, false)
+        //Configurando o adaptador e setando o adaptador
         val adapter = MyViewPageAdapter(childFragmentManager)
-
         view.viewpager.adapter = adapter
+
+        //Configurando as tabs e dando nome para as mesmas
         view.tabs.setupWithViewPager(view.viewpager)
         view.tabs.getTabAt(0)?.text = "Recomendados"
         view.tabs.getTabAt(1)?.text = "Conselhos"
@@ -53,17 +55,19 @@ class HomeFragment : Fragment() {
 
 class MyViewPageAdapter(manager: FragmentManager) : FragmentPagerAdapter(manager){
 
-    private val tabTitles = arrayOf("Tab1", "Tab2")
+    // Array com as tabs
+    private val tabTitles = arrayOf("Recomendados", "Conselhos")
 
     override fun getPageTitle(position: Int): CharSequence? {
         return tabTitles[position]
     }
 
     override fun getItem(position: Int): Fragment {
+        // Retornando o fragmento de acordo com o item selecionado
         return when (position) {
             0 -> RecomendadoFragment()
             1 -> ConselhosFragment()
-            else -> RecomendadoFragment() // shouldn't happen
+            else -> RecomendadoFragment()
         }
     }
 
