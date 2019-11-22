@@ -22,7 +22,7 @@
     <EditText
         android:id="@+id/edittext_chat_log"
         android:layout_width="0dp"
-        android:layout_height="50dp"
+        android:layout_height="60dp"
         android:layout_marginStart="8dp"
         android:layout_marginEnd="8dp"
         android:layout_marginBottom="8dp"
@@ -30,27 +30,37 @@
         android:background="@drawable/chat_log_send_btn"
         android:hint="Digite sua mensagem"
         android:textColor="@color/white"
-        android:inputType="textPersonName"
         android:textColorHint="@color/white"
+        android:inputType="textMultiLine"
+        android:paddingTop="5dp"
+        android:paddingBottom="10dp"
         android:paddingStart="20dp"
         android:paddingEnd="20dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toStartOf="@+id/botao_enviar_chat_log"
         app:layout_constraintStart_toStartOf="parent" />
 
+    <de.hdodenhof.circleimageview.CircleImageView
+        android:layout_width="35dp"
+        android:layout_height="35dp"
+        android:background="@drawable/ic_send_button"
+        app:layout_constraintBottom_toBottomOf="@+id/botao_enviar_chat_log"
+        app:layout_constraintEnd_toEndOf="@+id/botao_enviar_chat_log"
+        app:layout_constraintHorizontal_bias="0.6"
+        app:layout_constraintStart_toStartOf="@+id/botao_enviar_chat_log"
+        app:layout_constraintTop_toTopOf="@+id/botao_enviar_chat_log" />
+
     <Button
         android:id="@+id/botao_enviar_chat_log"
-        android:layout_width="wrap_content"
-        android:layout_height="50dp"
+        android:layout_width="60dp"
+        android:layout_height="60dp"
         android:layout_marginEnd="8dp"
         android:layout_marginBottom="8dp"
-        android:text="Enviar"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        android:background="@drawable/login_button_bg"
+        android:background="@drawable/chat_log_send_btn"
         android:textColor="@color/white"
         android:textStyle="bold"
-        />
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent" />
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/recyclerview_chat_log"
