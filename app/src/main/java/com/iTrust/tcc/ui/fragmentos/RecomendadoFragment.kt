@@ -19,7 +19,7 @@ class RecomendadoFragment : Fragment() {
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        fragmento_um_nome.text="Fragmento um"
+        fragmento_um_nome.text="Raul"
     }
 
 

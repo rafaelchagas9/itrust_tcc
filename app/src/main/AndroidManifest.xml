@@ -33,36 +33,38 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
+        <activity android:name=".ui.atividades.ComentariosActivity"></activity>
         <activity
-            android:name="com.iTrust.tcc.ui.atividades.mensagens.ChatLogActivity"
-            android:parentActivityName="com.iTrust.tcc.ui.atividades.mensagens.LatestMessagesActivity">
+            android:name=".ui.atividades.mensagens.ChatLogActivity"
+            android:parentActivityName=".ui.atividades.mensagens.LatestMessagesActivity">
             <meta-data
                 android:name="androidx.support.PARENT_ACTIVITY"
                 android:value=".ui.atividades.LatestMessagesActivity" />
         </activity>
         <activity
-            android:name="com.iTrust.tcc.ui.atividades.mensagens.NewMessageActivity"
-            android:parentActivityName="com.iTrust.tcc.ui.atividades.mensagens.LatestMessagesActivity">
+            android:name=".ui.atividades.mensagens.NewMessageActivity"
+            android:parentActivityName=".ui.atividades.mensagens.LatestMessagesActivity">
             <meta-data
                 android:name="androidx.support.PARENT_ACTIVITY"
                 android:value=".ui.atividades.LatestMessagesActivity" />
         </activity>
-        <activity android:name="com.iTrust.tcc.ui.atividades.mensagens.LatestMessagesActivity" />
-        <activity android:name="com.iTrust.tcc.ui.atividades.PaginaLugarActivity" />
-        <activity android:name="com.iTrust.tcc.ui.atividades.SearchActivity" />
-        <activity android:name="com.iTrust.tcc.ui.atividades.PermissaoActivity" />
-        <activity android:name="com.iTrust.tcc.ui.atividades.MainActivity" />
-        <activity android:name="com.iTrust.tcc.ui.atividades.EsqueceSenhaActivity" />
+        <activity android:name=".ui.atividades.mensagens.LatestMessagesActivity" />
+        <activity android:name=".ui.atividades.PaginaLugarActivity" />
+        <activity android:name=".ui.atividades.SearchActivity" />
+        <activity android:name=".ui.atividades.PermissaoActivity" />
+        <activity android:name=".ui.atividades.MainActivity" />
+        <activity android:name=".ui.atividades.EsqueceSenhaActivity" />
         <activity
-            android:name="com.iTrust.tcc.ui.atividades.CriarContaActivity"
+            android:name=".ui.atividades.CriarContaActivity"
             android:windowSoftInputMode="stateHidden" />
         <activity
-            android:name="com.iTrust.tcc.ui.atividades.LoginActivity"
+            android:name=".ui.atividades.LoginActivity"
             android:windowSoftInputMode="stateHidden" />
-        <activity android:name="com.iTrust.tcc.ui.atividades.SplashActivity">
+        <activity android:name=".ui.atividades.SplashActivity">
             <intent-filter>
-                <category android:name="android.intent.category.LAUNCHER"/>
-                <action android:name="android.intent.action.MAIN"/>
+                <category android:name="android.intent.category.LAUNCHER" />
+
+                <action android:name="android.intent.action.MAIN" />
             </intent-filter>
         </activity>
 

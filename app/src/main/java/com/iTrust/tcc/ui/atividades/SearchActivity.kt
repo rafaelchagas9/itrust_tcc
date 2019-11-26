@@ -50,6 +50,7 @@ class SearchActivity : AppCompatActivity(), OnMapReadyCallback {
     var foneLugar: String? = null
     var horaLugar: String? = null
     var siteLugar: String? = null
+    var horarioFormatado: String? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -179,41 +180,42 @@ class SearchActivity : AppCompatActivity(), OnMapReadyCallback {
 
         btn_selecionar_local.setOnClickListener{
             val i = Intent(this, PaginaLugarActivity::class.java)
-            if (nomeLugar!=null){
-            }else {
+            if (nomeLugar == null) {
                 Toast.makeText(this, "Por favor, selecione um local válido", Toast.LENGTH_SHORT).show()
+                return@setOnClickListener
             }
             //Verificando se algum campo está nulo, se sim, o programa atribui o valor "404"
             //para que seja fácil identificar e fazer o tratamento necessário
-            if (urlFoto!=null){
-            }else{
+            if (urlFoto == null) {
                 urlFoto="404"
             }
-            if (endLugar!=null){
-            }else{
+            if (endLugar == null) {
                 endLugar="404"
             }
-            if (foneLugar!=null){
-            }else{
+            if (foneLugar == null) {
                 foneLugar="404"
             }
-            if (horaLugar!=null){
-            }else{
+            if (horaLugar == null) {
                 horaLugar="404"
-            }
-            if (siteLugar!=null){
             }else{
+                limparStringHorario()
+            }
+            if (siteLugar == null) {
                 siteLugar="404"
             }
             i.putExtra("Nome", nomeLugar)
             i.putExtra("Endereco", endLugar)
             i.putExtra("Fone", foneLugar)
-            i.putExtra("Hora", horaLugar)
+            i.putExtra("Hora", horarioFormatado)
             i.putExtra("Site", siteLugar)
             i.putExtra("URL", urlFoto)
             startActivity(i)
         }
 
+    }
+
+    private fun limparStringHorario() {
+        horarioFormatado = horaLugar?.replaceBefore("weekday", "")?.replaceBefore("Monday","")
     }
 
     private fun openVoiceRecognizer() {
