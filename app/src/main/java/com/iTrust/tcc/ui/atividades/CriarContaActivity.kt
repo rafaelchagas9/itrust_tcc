@@ -5,7 +5,9 @@ package com.iTrust.tcc.ui.atividades
 
 import android.content.Intent
 import android.os.Bundle
+import android.text.Html
 import android.text.TextUtils
+import android.text.method.LinkMovementMethod
 import android.util.Log
 import android.widget.*
 import androidx.appcompat.app.AppCompatActivity
@@ -48,6 +50,9 @@ class CriarContaActivity : AppCompatActivity() {
         setContentView(R.layout.activity_criar_conta)
 
         iniciar()
+        txtTermosUso.movementMethod = LinkMovementMethod.getInstance()
+        val text = "<a href='https://pastebin.com/67FG11TA'> Declaro ter lido e aceitado os termos de uso   </a>"
+        txtTermosUso.text = (Html.fromHtml(text))
         txt_dataNasc?.addTextChangedListener(MaskEditUtil.mask(txt_dataNasc, MaskEditUtil.FORMAT_DATE))
     }
 
@@ -90,7 +95,7 @@ class CriarContaActivity : AppCompatActivity() {
 
         if(!TextUtils.isEmpty(primeiroNome) && !TextUtils.isEmpty(sobrenome) && !TextUtils.isEmpty(email)
                 && !TextUtils.isEmpty(cidade) && !TextUtils.isEmpty(dataNasc) && !TextUtils.isEmpty(senha) &&
-                !TextUtils.isEmpty(estado) && !TextUtils.isEmpty(condicao) ){
+                !TextUtils.isEmpty(estado) && !TextUtils.isEmpty(condicao) && checkBoxTermosUso.isSelected ){
             note_list_progress?.visibility = ProgressBar.VISIBLE
 
             mAuth!!.createUserWithEmailAndPassword(email!!, senha!!).addOnCompleteListener(this){ task ->
